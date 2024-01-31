@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: demo-server
+
+  profiles:
+    active: local
+
+server:
+  port: 58000
+
+
+logging:
+  file:
+    # 日志文件名，全路径 ps:user.dir 项目根目录
+    name: ${user.dir}/logs/${spring.application.name}.log

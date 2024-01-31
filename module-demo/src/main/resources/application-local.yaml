@@ -1,0 +1,39 @@
+
+spring:
+  datasource:
+    druid:
+      # Druid 【监控】相关的全局配置
+      web-stat-filter:
+        # 开启 sql 监控
+        enabled: true
+      stat-view-servlet:
+        # 开始 数据源监控页面
+        enabled: true
+        allow: # 设置白名单，不填则允许所有访问
+        url-pattern: /druid/*
+        login-username: # 控制台管理用户名和密码
+        login-password:
+      filter:
+        stat:
+          enabled: true
+          log-slow-sql: true # 慢 SQL 记录
+          slow-sql-millis: 100 #毫秒
+          merge-sql: true # 合并 SQL
+        wall:
+          config:
+            multi-statement-allow: true # 运行多条sql同时执行
+      url: jdbc:mysql://192.168.36.128:13100/sx-cloud?allowMultiQueries=true&useUnicode=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&autoReconnect=true&nullCatalogMeansCurrent=true
+      username: root
+      password: root
+      initial-size: 1 # 初始连接数
+      min-idle: 1 # 最小连接池数量
+      max-active: 20 # 最大连接池数量
+      max-wait: 600000 # 配置获取连接等待超时的时间，单位：毫秒
+      time-between-eviction-runs-millis: 60000 # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位：毫秒
+      min-evictable-idle-time-millis: 300000 # 配置一个连接在池中最小生存的时间，单位：毫秒
+      max-evictable-idle-time-millis: 900000 # 配置一个连接在池中最大生存的时间，单位：毫秒
+      validation-query: SELECT 1 FROM DUAL # 配置检测连接是否有效
+      test-while-idle: true # 空闲时检测
+      test-on-borrow: false # 借用时检测
+      test-on-return: false # 归还时检测
+

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cn.sx.cloud</groupId>
+        <artifactId>module-system</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>module-system-biz</artifactId>
+
+    <name>${project.artifactId}</name>
+
+    <packaging>jar</packaging>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>cn.sx.cloud</groupId>
+            <artifactId>module-system-api</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <!-- Spring Cloud 基础 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+
+        <!-- 依赖服务 -->
+        <dependency>
+            <groupId>cn.iocoder.cloud</groupId>
+            <artifactId>yudao-module-system-api</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <!-- db -->
+        <dependency>
+            <groupId>cn.sx.cloud</groupId>
+            <artifactId>mybatis-starter</artifactId>
+        </dependency>
+
+        <!-- web -->
+        <dependency>
+            <groupId>cn.sx.cloud</groupId>
+            <artifactId>web-starter</artifactId>
+        </dependency>
+
+        <!-- rpc todo: 待封装成为组件 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+    </dependencies>
+</project>

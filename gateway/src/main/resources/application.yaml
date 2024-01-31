@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        ## system-server
+        - id: system-admin-api #这是路由的唯一标识符，用于在其他地方引用这个路由。
+          uri: lb://system-server # 这是路由的目标 URI。在这个例子中，它是一个 lb://scheme，用于负载均衡到 system-server 服务的实例。
+          predicates: # 这是路由的断言列表。断言用于匹配HTTP请求。只有满足所有断言的请求才会被路由。在这个例子中，只有路径匹配/admin-api/system/**的请求才会被路由
+            - Path=/admin-api/system/**
+        ### demo-server
+        - id: demo-admin-api #这是路由的唯一标识符，用于在其他地方引用这个路由。
+          uri: lb://demo-server # 这是路由的目标 URI。在这个例子中，它是一个 lb://scheme，用于负载均衡到 demo-server 服务的实例。
+          predicates: # 这是路由的断言列表。断言用于匹配HTTP请求。只有满足所有断言的请求才会被路由。在这个例子中，只有路径匹配/admin-api/demo/**的请求才会被路由
+            - Path=/demo/**

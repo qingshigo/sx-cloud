@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  mysql:
+    container_name: "${COMPOSE_PROJECT_NAME}-mysql"
+    image: mysql:8.0.36
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: nacos
+    volumes:
+      - /home/shenxin/dev/common/mysql/conf:/etc/mysql/conf.d
+      - /home/shenxin/dev/common/mysql/data:/var/lib/mysql
+      - /home/shenxin/dev/common/nacos/mysql-schema.sql:/docker-entrypoint-initdb.d/mysql-schema.sql
+    ports:
+      - "13100:3306"
+    networks:
+      - default
+
+  redis:
+    container_name: "${COMPOSE_PROJECT_NAME}-redis"
+    image: redis:7.2.4
+    restart: unless-stopped
+    volumes:
+      - /home/shenxin/dev/common/redis/data:/data
+    command: [ "redis-server"]
+    ports:
+      - "13200:6379"
+    networks:
+      - default
+
+  nacos:
+    container_name: "${COMPOSE_PROJECT_NAME}-nacos"
+    image: nacos/nacos-server:2.0.2
+    restart: unless-stopped
+    ports:
+      - "13900:8848"
+      - "14900:9848"
+      - "14901:9849"
+    environment:
+      - MODE=standalone
+      - SPRING_DATASOURCE_PLATFORM=mysql
+      - MYSQL_SERVICE_HOST=mysql
+      - MYSQL_SERVICE_DB_NAME=nacos
+      - MYSQL_SERVICE_PORT=3306
+      - MYSQL_SERVICE_USER=root
+      - MYSQL_SERVICE_PASSWORD=root
+      - MYSQL_SERVICE_DB_PARAM=useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    networks:
+      - default
+    depends_on:
+      - mysql
